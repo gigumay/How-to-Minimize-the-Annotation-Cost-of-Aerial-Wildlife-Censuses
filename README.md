@@ -1,5 +1,5 @@
 # How-to-Minimize-the-Annotation-Cost-of-Aerial-Wildlife-Censuses
-GitHub repo for the paper "How to Minimize the Annotation  Cost of Aerial Wildlife Censuses". In our paper we compare three deep learning architectures (one localization model, HerdNet, and two object detection models, YOLO and POLO) with respect to their ability of detecting animals from aerial imagery. Our experiments are conducted on four diverse datasets containing various animal species, environments, degrees of animal density, camera angles, and taken at different altitudes (cf. pictures below). We look at the effect of label complexity (i.e., hand-crafted bounding boxes vs. auto-generaterd pseudo-boxes vs. point labels) on detection accuracy and counting performance. We find:
+GitHub repo for the paper "How to Minimize the Annotation  Cost of Aerial Wildlife Censuses". In our paper we compare three deep learning architectures (one localization model, HerdNet, and two object detection models, YOLO and POLO) with respect to their ability of detecting animals from aerial imagery. Our experiments are conducted on four diverse datasets containing various animal species, environments, degrees of animal density, camera angles, and taken at different altitudes (cf. pictures below; abbreviations can be found in the paper). We look at the effect of label complexity (i.e., hand-crafted bounding boxes vs. auto-generaterd pseudo-boxes vs. point labels) on detection accuracy and counting performance. We find:
 - Wildlife counting accuracy is largely maintained at reduced label complexity
 - Counting accuracy is robust towards variations in the size of pseudo box labels 
 - Current detection models perform better on oblique images than previous architectures
@@ -51,3 +51,13 @@ pip install git+https://github.com/gigumay/POLO.git#egg=ultralytics
 
 ## General Information
 - The notebook `inference_YOLO_POLO.ipynb` contains step-by-step instructions for running inference using trained YOLO/POLO models... FINISH ONCE I GET UPDATE FROM ALEX
+- The utils folder contains functionalities necessary for running inference and evaluating the result:
+    - `globs.py`: Contains global variables used across files in the folder.
+    - `HN.py`: Implements converting HerdNet output to a format that can be run through the evaluation pipeline.
+    - `inference_POLO.py`: Implements functionalities to run infernece with POLO models.
+    - `model_eval_py`: Methods to evaluate detection results (compute preecision, recall, MAE, ...).
+    - `processing_utils.py`: Additional processing functionalities.
+- We run tiled inference, i.e., we split an image into overlapping patches, perform inference on these patches and then aggregate all patch-level predictions into a single set of image level predictions. [This helps for small object detection, as it increases the relative size of objects](https://openaccess.thecvf.com/content_CVPRW_2019/papers/UAVision/Unel_The_Power_of_Tiling_for_Small_Object_Detection_CVPRW_2019_paper.pdf). 
+
+### Questions?
+For anything regarding the code or the paper, please reach out to: gigumay@gmail.com
