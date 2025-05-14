@@ -1,16 +1,38 @@
 # How-to-Minimize-the-Annotation-Cost-of-Aerial-Wildlife-Censuses
-GitHub repo for the paper "How to Minimize the Annotation  Cost of Aerial Wildlife Censuses". In our paper we compare three deep learning architectures (one localization model, HerdNet, and two object detection models, YOLO and POLO; cf. below picture) with respect to their ability of detectinganimals from aerial imagery. Our experiments are conducted on four diverse datasets containing various animal species, environments, degrees of animal density, camera angles, and taken at different altitudes. We look at the effect of label complexity (i.e., hand-crafted bounding boxes vs. auto-generaterd pseudo-boxes vs. point labels) on detection accuracy and counting performance. We find:
+GitHub repo for the paper "How to Minimize the Annotation  Cost of Aerial Wildlife Censuses". In our paper we compare three deep learning architectures (one localization model, HerdNet, and two object detection models, YOLO and POLO) with respect to their ability of detecting animals from aerial imagery. Our experiments are conducted on four diverse datasets containing various animal species, environments, degrees of animal density, camera angles, and taken at different altitudes (cf. pictures below). We look at the effect of label complexity (i.e., hand-crafted bounding boxes vs. auto-generaterd pseudo-boxes vs. point labels) on detection accuracy and counting performance. We find:
 - Wildlife counting accuracy is largely maintained at reduced label complexity
 - Counting accuracy is robust towards variations in the size of pseudo box labels 
 - Current detection models perform better on oblique images than previous architectures
 
 
 
-| ![space-1.jpg](./imgs/YOLO_POLO.png) | 
-|:--:| 
-| *Our detection models: YOLO & POLO* |
-| ![space-1.jpg](./imgs/HN.png) | 
-| *Our localization model: HerdNet* |
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./imgs/2017_Replicate_2017-09-30_Cam1_293A3222.JPG" width="200"><br>
+      <em>EW-IL22</em>
+    </td>
+    <td align="center">
+      <img src="./imgs/20191220_LA_DSC_0054.JPG" width="200"><br>
+      <em>AD-ENCR23</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./imgs/DJI_0001-180.jpg" width="200"><br>
+      <em>BK-L23</em>
+    </td>
+    <td align="center">
+      <img src="./imgs/IMG_9307.JPG" width="200"><br>
+      <em>JE-TL19</em>
+    </td>
+  </tr>
+</table>
+
+</div>
+
 
 This repo is intended to help users reproduce our results, and to provide tools for running inference with trained models. For instructions on model training, we kindly refer the reader to the [POLO](https://github.com/gigumay/POLO) and [HerdNet](https://github.com/Alexandre-Delplanque/HerdNet) GitHub repositories. All model weights are available on [Zenodo](https://zenodo.org/records/15399623). We uploaded the test sets we used to measure model performance to the same Zenodo repository, except for the test images of the AD-ENCR23 dataset, as these cannot be made publicly available. 
 
@@ -19,7 +41,7 @@ To run the code in this repository, please download the `how2minimize.yml` file 
 ```
 conda env create -f how2minimize.yml
 ```
-This will create a conda environment with (almost) all necessary packages. Subseqeuntly, please run:
+This will create a conda environment with (almost) all necessary packages. Subsequently, please run:
 ```
 conda activate how2minimize
 ```
