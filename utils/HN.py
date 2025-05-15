@@ -2,12 +2,13 @@ import torch
 import math
 import json
 import pickle
+import random
 import pandas as pd
 import numpy as np
 
 from pathlib import Path
 
-from .inference_YOLO import plot_img_predictions, load_img_gt
+from .inference_YOLO import plot_img_predictions, load_img_gt, match_predictions_loc
 from ultralytics.utils.ops import generate_radii_t
 from ultralytics.utils.metrics import ConfusionMatrix, loc_dor_pw
 
@@ -40,7 +41,7 @@ def read_detections_HN(dets_file: str, cls_name2id: dict, imgs_dir: str, dor_thr
         conf = torch.Tensor(img_dets["scores"].values).reshape(-1, 1)
         conf = conf[~torch.any(conf.isnan(),dim=1)]
 
-        cls_names = [sn.capitalize() for sn in ["species"].values]
+        cls_names = [sn.capitalize() for sn in img_dets["species"].values]
         cls_ids = [cls_name2id[name] for name in cls_names if isinstance(name, str)]
         cls = torch.Tensor(cls_ids).reshape(-1, 1)
 
