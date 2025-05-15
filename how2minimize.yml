@@ -2,6 +2,7 @@ name: how2minimize
 channels:
   - defaults
 dependencies:
+  - python=3.10
   - numpy=1.26.3
   - numpy-base=1.26.3
   - opencv=4.6.0
