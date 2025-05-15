@@ -48,6 +48,9 @@ conda activate how2minimize
 ```
 pip install git+https://github.com/gigumay/POLO.git#egg=ultralytics
 ```
+```
+pip install git+https://github.com/Alexandre-Delplanque/HerdNet#egg=animaloc
+```
 
 ## General Information
 - The notebook `inference_YOLO_POLO.ipynb` contains step-by-step instructions for running inference using trained YOLO/POLO models... FINISH ONCE I GET UPDATE FROM ALEX
