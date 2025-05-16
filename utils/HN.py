@@ -8,7 +8,7 @@ import numpy as np
 
 from pathlib import Path
 
-from .inference_YOLO import plot_img_predictions, load_img_gt, match_predictions_loc
+from .inference_POLO import plot_img_predictions, load_img_gt, match_predictions_loc
 from ultralytics.utils.ops import generate_radii_t
 from ultralytics.utils.metrics import ConfusionMatrix, loc_dor_pw
 
