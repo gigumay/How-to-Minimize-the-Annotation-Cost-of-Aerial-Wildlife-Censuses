@@ -52,16 +52,18 @@ def compute_errors_img_lvl(gt_counts_dir: str, pred_counts_dir: str, class_ids: 
         # get matching prediction file for a gt file 
         fn_pred = [pf for pf in pred_files if fn_gt.stem == pf.stem]
 
-        assert len(fn_pred) == 1, f"Found {len(fn_pred)} matching prediction files for file {fn_gt}. Expected 1."
+        assert len(fn_pred) <= 1, f"Found {len(fn_pred)} matching prediction files for file {fn_gt}. Expected 1 or 0."
         
-        fn_pred = fn_pred[0]
+        if fn_pred:
+            fn_pred = fn_pred[0]
+            with open(fn_pred, "r") as pred:
+                pred_dict = json.load(pred)
+        else:
+            pred_dict = {str(cid): 0 for cid in class_ids}
+
 
         with open(fn_gt, "r") as gt:
             gt_dict = json.load(gt)
-
-        with open(fn_pred, "r") as pred:
-            pred_dict = json.load(pred)
-
 
         # if no predictions for a class were made, the count number is zero 
         gt_dict = {int(k): v for k,v in gt_dict.items()}
