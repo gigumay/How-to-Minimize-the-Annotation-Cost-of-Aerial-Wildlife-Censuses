@@ -36,6 +36,7 @@ def read_detections_HN(dets_file: str, cls_name2id: dict, imgs_dir: str, dor_thr
         img_dets = hn_dets[hn_dets["images"] == fn]
         coords = torch.Tensor(img_dets[["x", "y"]].values)
         coords = coords[~torch.any(coords.isnan(),dim=1)]
+        #coords = coords * 2
 
         conf = torch.Tensor(img_dets["scores"].values).reshape(-1, 1)
         conf = conf[~torch.any(conf.isnan(),dim=1)]

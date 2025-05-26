@@ -1,12 +1,16 @@
 import cv2
 import math
+import json
 
 from pathlib import Path
 from tqdm import tqdm
 from pathlib import Path
+from PIL import Image
 
 from .globs import *
 
+
+IMG_SUFFIXES = [".PNG", ".JPG", ".JPEG", ".jpg"]
 
 def get_patch_start_positions(img_width: int, img_height: int, patch_dims: dict, overlap: float) -> list: 
     """
@@ -290,4 +294,36 @@ def adjust_pseudo_dims_YOLO(data_dir: str, new_dims: dict, old_dims: dict, img_d
 
     return clipped_counter
 
-    
+
+
+def make_coco_file(imgs_dir: str, categories: list) -> str:
+    """
+    Generates a coco-dataset json to pass to the sahi-prediction function so that (non-visual) results are saved.
+    Arguments: 
+        imgs_dir (str):  path to the directory containing the images to be used for inference
+        categories (list):  list containing dictionaries that map class ids to class names. 
+    Returns: 
+        string specifying the path to the created json file
+    """
+    coco_dict = {"images": [], "annotations": [], "categories": categories}
+
+    id_count = 0
+
+    for img in Path(imgs_dir).glob('*'):
+        if img.suffix.upper() not in IMG_SUFFIXES:
+            print(f"WARNING: skipping file {str(img)} as the file extension suggests that it's not a picture!")
+            continue
+        
+        pil_img = Image.open(img)
+        width, height = pil_img.size
+        file_name = str(img)
+        img_dict = {"width": width, "height": height, "file_name": file_name, "id": id_count}
+        coco_dict["images"].append(img_dict)
+
+        id_count += 1
+
+    json_fn = f"{imgs_dir}/{Path(imgs_dir).stem}_coco_dataset.json"
+    with open(json_fn, "w") as f:
+        json.dump(coco_dict, f, indent=2)
+
+    return json_fn
