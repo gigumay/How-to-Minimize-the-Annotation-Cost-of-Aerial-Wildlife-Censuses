@@ -1,4 +1,4 @@
-name: P0_YOLOcate
+name: how2minimize
 channels:
   - defaults
 dependencies:
