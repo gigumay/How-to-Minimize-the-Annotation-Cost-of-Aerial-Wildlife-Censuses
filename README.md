@@ -65,6 +65,7 @@ pip install git+https://github.com/Alexandre-Delplanque/HerdNet#egg=animaloc
     - `model_eval_py`: Methods to evaluate detection results (compute preecision, recall, MAE, ...).
     - `processing_utils.py`: Additional processing functionalities.
 - We run tiled inference, i.e., we split an image into overlapping patches, perform inference on these patches and then aggregate all patch-level predictions into a single set of image level predictions. [This helps for small object detection, as it increases the relative size of objects](https://openaccess.thecvf.com/content_CVPRW_2019/papers/UAVision/Unel_The_Power_of_Tiling_for_Small_Object_Detection_CVPRW_2019_paper.pdf). 
+- NOTE ABOUT ENV YML FILES 
 
 ### Questions?
 For anything regarding the code or the paper, please reach out to: gigumay@gmail.com

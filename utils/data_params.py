@@ -16,6 +16,7 @@ parameters = {
                            "iou_thresh_pseudo": 0.3, 
                            "radii": {0: 62, 1: 81, 2: 49}, 
                            "classID2name": {0: "Elephant", 1: "Giraffe", 2: "Zebra"}, 
+                           "classID2name_HN": {0: "Elephant", 1: "Giraffe", 2: "Zebra"}, 
                            "img_format": "JPG"
                            },
                 "EW-IL22": {
@@ -25,6 +26,7 @@ parameters = {
                            "iou_thresh_pseudo": 0.5,
                            "radii": {0: 50, 1: 50, 2: 37.5, 3: 50, 4: 50}, 
                            "classID2name": {0: "Brant", 1: "Other", 2: "Gull", 3: "Canada", 4: "Emperor"},
+                           "classID2name_HN": {0: "Brant", 1: "Other", 2: "Gull", 3: "Canada", 4: "Emperor"},
                            "img_format": "JPG"
                             }
 }
