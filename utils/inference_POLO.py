@@ -628,6 +628,7 @@ def read_output_SAHI(out_json_SAHI: str, dataset_json_SAHI: str, class_ids: list
             ann_dict = json.load(anns)
 
     id2preds = {}
+    counts_total = {cid: 0 for cid in class_ids}
 
     # for each image in the dataset
     for img in dataset_SAHI["images"]:
@@ -656,6 +657,9 @@ def read_output_SAHI(out_json_SAHI: str, dataset_json_SAHI: str, class_ids: list
 
         with open(f"{dets_dir}/{img_fn}.json", "w") as f:
             json.dump(counts, f, indent=1)
+
+        for cid in counts.keys():
+            counts_total[cid] += counts[cid]
 
         # if annotations are available, make CMs and extract EM
         if ann_file is not None:
@@ -708,7 +712,11 @@ def read_output_SAHI(out_json_SAHI: str, dataset_json_SAHI: str, class_ids: list
         if visualize and post_nms > 0:
             assert not (plot_gt and ann_file is None), "Plotting ground truth requested but no annotation file provided!"
             plot_img_predictions(img_fn=img_path, coords=dets_t[:,:4], cls=dets_t[:,-1], output_dir=vis_dir, 
-                                 gt_coords=gt_coords, gt_class=gt_cls, plot_gt_color=plot_gt_color)    
+                                 gt_coords=gt_coords, gt_class=gt_cls, plot_gt_color=plot_gt_color)  
+
+    with open(f"{output_dir}/counts_toal.json", "w") as f:
+        json.dump(counts_total, f)
+      
             
 
 
